@@ -1,4 +1,4 @@
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 import useData from "../hooks/useData";
 import getCroppedImageUrl from "../services/image-url";
 
@@ -10,22 +10,26 @@ interface Genre {
 
 const GenreList = () => {
   const { data, error, isLoading } = useData<Genre>("/genres");
-  console.log(data);
+
   return (
-    <List>
-      {data.map((genre) => (
-        <ListItem key={genre.id} paddingY="5px">
-          <HStack>
-            <Image
-              boxSize="32px"
-              borderRadius={8}
-              src={getCroppedImageUrl(genre.image_background)}
-            />
-            <Text fontSize="lg">{genre.name}</Text>
-          </HStack>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      {isLoading && <Spinner />}
+      {error && <Text>{error}</Text>}
+      <List>
+        {data.map((genre) => (
+          <ListItem key={genre.id} paddingY="5px">
+            <HStack>
+              <Image
+                boxSize="32px"
+                borderRadius={8}
+                src={getCroppedImageUrl(genre.image_background)}
+              />
+              <Text fontSize="lg">{genre.name}</Text>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
