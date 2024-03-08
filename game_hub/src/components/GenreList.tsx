@@ -17,10 +17,11 @@ export interface Genre {
 }
 
 interface Props {
+  selectedGenre: Genre | null;
   onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, error, isLoading } = useData<Genre>("/genres");
 
   return (
@@ -39,8 +40,8 @@ const GenreList = ({ onSelectGenre }: Props) => {
               <Button
                 onClick={() => onSelectGenre(genre)}
                 fontSize="lg"
-                fontWeight="500"
                 variant="link"
+                fontWeight={selectedGenre?.id === genre.id ? "500" : "400"}
               >
                 {genre.name}
               </Button>

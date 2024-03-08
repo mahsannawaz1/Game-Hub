@@ -15,6 +15,7 @@ const useData = <T> (endpoint:string,requestConfig?:AxiosRequestConfig,deps?:any
   
     useEffect(() => {
       setIsLoading(true)
+      setData([])
       apiClient
         .get< FetchResponse<T> >( endpoint,{ ...requestConfig } )
         .then((res) => {
