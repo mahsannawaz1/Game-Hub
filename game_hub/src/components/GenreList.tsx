@@ -1,9 +1,13 @@
-import React from "react";
-import useGenres from "../hooks/useGenres";
+import useData from "../hooks/useData";
+
+interface Genre {
+  id: number;
+  name: string;
+}
 
 const GenreList = () => {
-  const { genres, error, isLoading } = useGenres();
-  console.log(genres);
+  const { data, error, isLoading } = useData<Genre>("/genres");
+  console.log(data);
   return <div>GenreList</div>;
 };
 
