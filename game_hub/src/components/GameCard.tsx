@@ -15,13 +15,17 @@ const GameCard = ({
     <Card>
       <Image maxHeight="252px" src={getCroppedImageUrl(background_image)} />
       <CardBody>
-        <Heading fontSize="2xl">{name}</Heading>
-        <HStack justifyContent="space-between" alignItems="center">
+        <HStack
+          justifyContent="space-between"
+          alignItems="center"
+          marginBottom={3}
+        >
           <PlatformIconList
             platforms={parent_platforms.map(({ platform }) => platform)}
           />
           <CriticScore score={metacritic} />
         </HStack>
+        <Heading fontSize="2xl">{name}</Heading>
       </CardBody>
     </Card>
   );
