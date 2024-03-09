@@ -6,6 +6,7 @@ import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 import SearchInput from "./components/SearchInput";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -46,6 +47,7 @@ function App() {
       </Show>
 
       <GridItem area="main" padding={10} paddingTop={0}>
+        <GameHeading gameQuery={gameQuery} />
         <HStack spacing={5} marginBottom={5}>
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
