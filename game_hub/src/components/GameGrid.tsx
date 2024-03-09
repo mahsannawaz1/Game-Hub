@@ -24,15 +24,21 @@ export interface Game {
 interface Props {
   selectedGenre: Genre | null;
   selectedPlatform: Platform | null;
+  orderBy: { value: string; label: string } | null;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
+const GameGrid = ({ selectedGenre, selectedPlatform, orderBy }: Props) => {
+  orderBy;
   const { data, error, isLoading } = useData<Game>(
     "/games",
     {
-      params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+      params: {
+        genres: selectedGenre?.id,
+        platforms: selectedPlatform?.id,
+        ordering: orderBy?.value,
+      },
     },
-    [selectedGenre?.id, selectedPlatform?.id]
+    [selectedGenre?.id, selectedPlatform?.id, orderBy?.value]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
