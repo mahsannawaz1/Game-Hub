@@ -23,15 +23,16 @@ export interface Game {
 
 interface Props {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
 
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
   const { data, error, isLoading } = useData<Game>(
     "/games",
     {
-      params: { genres: selectedGenre?.id },
+      params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
     },
-    [selectedGenre?.id]
+    [selectedGenre?.id, selectedPlatform?.id]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
