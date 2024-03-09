@@ -25,9 +25,15 @@ interface Props {
   selectedGenre: Genre | null;
   selectedPlatform: Platform | null;
   orderBy: { value: string; label: string } | null;
+  searchBy: string | "";
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform, orderBy }: Props) => {
+const GameGrid = ({
+  selectedGenre,
+  selectedPlatform,
+  orderBy,
+  searchBy,
+}: Props) => {
   orderBy;
   const { data, error, isLoading } = useData<Game>(
     "/games",
@@ -36,9 +42,10 @@ const GameGrid = ({ selectedGenre, selectedPlatform, orderBy }: Props) => {
         genres: selectedGenre?.id,
         platforms: selectedPlatform?.id,
         ordering: orderBy?.value,
+        search: searchBy,
       },
     },
-    [selectedGenre?.id, selectedPlatform?.id, orderBy?.value]
+    [selectedGenre?.id, selectedPlatform?.id, orderBy?.value, searchBy]
   );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
