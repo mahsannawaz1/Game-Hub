@@ -27,9 +27,10 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
   return (
     <>
+      <Heading marginBottom={2}>Genres</Heading>
       {isLoading && <Spinner />}
       {error && <Text>{error}</Text>}
-      <Heading marginBottom={2}>Genres</Heading>
+
       <List>
         {data.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
