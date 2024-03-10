@@ -4,8 +4,16 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import useData from "../hooks/useData";
+
 import { Genre } from "./GenreList";
+import useGames from "../hooks/useGames";
+
+export interface QueryKeys {
+  genre: number | undefined;
+  platform: number | undefined;
+  orderBy: string | undefined;
+  search: string | null;
+}
 
 export interface Platform {
   id: number;
@@ -36,23 +44,29 @@ const GameGrid = ({
   searchBy,
 }: Props) => {
   orderBy;
-  const { data, error, isLoading } = useData<Game>(
+  const skeletons = [1, 2, 3, 4, 5, 6];
+
+  const { data, error, isLoading } = useGames(
     "/games",
     {
       params: {
         genres: selectedGenre?.id,
-        platforms: selectedPlatform?.id,
+        parent_platforms: selectedPlatform?.id,
         ordering: orderBy?.value,
         search: searchBy,
       },
     },
-    [selectedGenre?.id, selectedPlatform?.id, orderBy?.value, searchBy]
+    {
+      genre: selectedGenre?.id,
+      platform: selectedPlatform?.id,
+      orderBy: orderBy?.value,
+      search: searchBy,
+    }
   );
-  const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
     <React.Fragment>
-      {error && <Text>{error}</Text>}
+      {error && <Text>{error.message}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={10}
@@ -64,7 +78,7 @@ const GameGrid = ({
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {data.map((game, index) => (
+        {data?.results.map((game, index) => (
           <GameCardContainer key={index}>
             <GameCard game={game} />
           </GameCardContainer>
