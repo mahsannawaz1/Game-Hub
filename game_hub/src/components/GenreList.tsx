@@ -5,12 +5,9 @@ import {
   Image,
   List,
   ListItem,
-  Spinner,
-  Text,
 } from "@chakra-ui/react";
-import useData from "../hooks/useData";
 import getCroppedImageUrl from "../services/image-url";
-
+import genres from "../data/genres";
 export interface Genre {
   id: number;
   name: string;
@@ -23,16 +20,12 @@ interface Props {
 }
 
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
-  const { data, error, isLoading } = useData<Genre>("/genres");
-
   return (
     <>
       <Heading marginBottom={2}>Genres</Heading>
-      {isLoading && <Spinner />}
-      {error && <Text>{error}</Text>}
 
       <List>
-        {data.map((genre) => (
+        {genres.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
