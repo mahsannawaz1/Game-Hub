@@ -1,6 +1,5 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import platforms from "../data/platforms";
 import usePlatforms from "../hooks/usePlatforms";
 export interface Platform {
   id: number;

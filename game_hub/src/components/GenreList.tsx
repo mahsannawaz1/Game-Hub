@@ -7,7 +7,6 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import getCroppedImageUrl from "../services/image-url";
-import genres from "../data/genres";
 import useGenres from "./../hooks/useGenres";
 export interface Genre {
   id: number;
