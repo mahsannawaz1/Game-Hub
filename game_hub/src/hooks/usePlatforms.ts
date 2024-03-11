@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query"
-import { FetchResponse } from "../services/api-client"
 import { Platform } from "../components/GameGrid"
-import apiClient from "../services/api-client"
 import platforms from "../data/platforms"
+import APIService from "../services/api-service"
+
+const apiService = new APIService<Platform>("/platforms/lists/parents")
 
 const usePlatforms = (endpoint:string) => {
     return  useQuery({
         queryKey:['platforms'],
-        queryFn: () => apiClient.get<FetchResponse<Platform>>(endpoint).then(res=>res.data),
+        queryFn: () => apiService.getData(),
         staleTime: 24 * 60 * 60 * 1000, // 1 Day
         initialData: {count:platforms.length,results:platforms}
         
