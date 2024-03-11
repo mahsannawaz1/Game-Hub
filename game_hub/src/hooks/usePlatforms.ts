@@ -10,7 +10,7 @@ const usePlatforms = (endpoint:string) => {
         queryKey:['platforms'],
         queryFn: () => apiService.getData(),
         staleTime: 24 * 60 * 60 * 1000, // 1 Day
-        initialData: {count:platforms.length,results:platforms}
+        initialData: {count:platforms.length,results:platforms,next:null}
         
     })
 }

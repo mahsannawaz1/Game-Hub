@@ -10,7 +10,7 @@ const useGenres = (endpoint:string) => {
             queryKey:['genres'],
             queryFn: () => apiService.getData(),
             staleTime: 24 * 60 * 60 * 1000, // 1 Day
-            initialData: { count:genres.length,results:genres }
+            initialData: { count:genres.length,results:genres,next:null }
             
         })
 }
