@@ -6,16 +6,8 @@ import { FetchResponse } from "../services/api-client";
 
 const apiService = new APIService<Game>("/games")
 
+
 const useGames = (requestConfig?:AxiosRequestConfig,queryKeys?:QueryKeys) => {
-    
-    return  useQuery({
-        queryKey:['games',queryKeys],
-        queryFn: () => apiService.getData(requestConfig)
-
-    })
-}
-
-const useGames1 = (requestConfig?:AxiosRequestConfig,queryKeys?:QueryKeys) => {
     
     return  useInfiniteQuery<FetchResponse<Game>,Error>({
         queryKey:['games',queryKeys],
@@ -28,4 +20,4 @@ const useGames1 = (requestConfig?:AxiosRequestConfig,queryKeys?:QueryKeys) => {
     })
 }
 
-export default useGames1
+export default useGames

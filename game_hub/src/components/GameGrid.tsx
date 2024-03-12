@@ -4,8 +4,8 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { Genre } from "./GenreList";
-import useGames1 from "../hooks/useGames";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useGames from "../hooks/useGames";
 
 export interface QueryKeys {
   genre: number | undefined;
@@ -44,7 +44,7 @@ const GameGrid = ({
 }: Props) => {
   const skeletons = [1, 2, 3, 4, 5, 6];
 
-  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames1(
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames(
     {
       params: {
         genres: selectedGenre?.id,
