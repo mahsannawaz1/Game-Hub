@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
-  const { data, error, isLoading } = usePlatforms("/platforms/lists/parents");
+  const { data, error, isLoading } = usePlatforms();
 
   return (
     <Menu>

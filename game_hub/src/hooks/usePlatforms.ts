@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query"
 import { Platform } from "../components/GameGrid"
 import platforms from "../data/platforms"
 import APIService from "../services/api-service"
+import ms from "ms"
 
 const apiService = new APIService<Platform>("/platforms/lists/parents")
 
-const usePlatforms = (endpoint:string) => {
+const usePlatforms = () => {
     return  useQuery({
         queryKey:['platforms'],
         queryFn: () => apiService.getData(),
-        staleTime: 24 * 60 * 60 * 1000, // 1 Day
+        staleTime: ms("24h"),
         initialData: {count:platforms.length,results:platforms,next:null}
         
     })
